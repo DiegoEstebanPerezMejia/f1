@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinPredict PyME · Mi empresa</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="top">
+    <span class="brand">FinPredict PyME</span>
+    <span class="who">
+      <span id="who"></span>
+      <button class="btn secondary small" id="pwBtn">Cambiar contraseña</button>
+      <button class="btn secondary small" id="outBtn">Salir</button>
+    </span>
+  </header>
+  <main>
+    <div class="tabs" id="tabs">
+      <button data-tab="q" class="active">1. Cuestionario</button>
+      <button data-tab="d">2. Estados financieros</button>
+      <button data-tab="a">3. Análisis y predicción</button>
+    </div>
+
+    <section id="tab-q">
+      <form class="card" id="qForm"></form>
+    </section>
+
+    <section id="tab-d" hidden>
+      <div class="card">
+        <h2>Subir estado financiero</h2>
+        <p class="small">Acepta Excel (.xlsx, .xls), CSV, PDF con texto y TXT (máx. 10 MB). El sistema detecta automáticamente cifras clave (ingresos, utilidades, activos, pasivos, capital, etc.). La primera columna numérica se toma como el periodo más reciente.</p>
+        <form id="dForm">
+          <div class="row">
+            <div>
+              <label for="doc_type">Tipo de documento</label>
+              <select id="doc_type" name="doc_type">
+                <option value="estado_resultados">Estado de resultados</option>
+                <option value="balance_general">Balance general</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label for="period">Periodo (opcional)</label>
+              <input id="period" name="period" placeholder="Ej. 2025 o Ene–Dic 2025">
+            </div>
+            <div>
+              <label for="file">Archivo</label>
+              <input id="file" name="file" type="file" accept=".xlsx,.xls,.csv,.tsv,.pdf,.txt,.ods" required>
+            </div>
+          </div>
+          <div class="msg" id="dMsg" hidden></div>
+          <button class="btn" id="dBtn" style="margin-top:1rem">Subir y procesar</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Documentos cargados</h2>
+        <div id="docs"></div>
+      </div>
+    </section>
+
+    <section id="tab-a" hidden>
+      <div class="card">
+        <h2>Generar análisis</h2>
+        <p class="small">Usa tus respuestas del cuestionario y las cifras detectadas en tus documentos para calcular indicadores, proyectar 6 meses y generar recomendaciones.</p>
+        <button class="btn" id="aBtn">Generar análisis ahora</button>
+        <div class="msg" id="aMsg" hidden></div>
+      </div>
+      <div id="result"></div>
+    </section>
+  </main>
+
+  <dialog id="pwDlg" class="card" style="max-width:360px">
+    <form id="pwForm" method="dialog">
+      <h2>Cambiar contraseña</h2>
+      <label for="pwCur">Contraseña actual</label>
+      <input id="pwCur" type="password" autocomplete="current-password" required>
+      <label for="pwNew">Nueva contraseña (mín. 8 caracteres)</label>
+      <input id="pwNew" type="password" autocomplete="new-password" minlength="8" required>
+      <div class="msg" id="pwMsg" hidden></div>
+      <div style="display:flex;gap:.5rem;margin-top:1rem">
+        <button class="btn" id="pwSave" type="button">Guardar</button>
+        <button class="btn secondary" id="pwCancel" type="button">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
